@@ -11,7 +11,6 @@ resolvers += "Akka Snapshot Repository" at "http://repo.akka.io/snapshots/"
 scalaVersion := "2.12.2"
 
 libraryDependencies += guice
-libraryDependencies ++= Seq( ehcache , ws )
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.2" % Test
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "4.0.0"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "4.0.0"
