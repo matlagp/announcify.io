@@ -10,9 +10,11 @@ resolvers += "Akka Snapshot Repository" at "http://repo.akka.io/snapshots/"
       
 scalaVersion := "2.12.2"
 
-libraryDependencies ++= Seq( ehcache , ws , specs2 % Test , guice,"com.typesafe.play" %% "play-slick" % "3.0.0",
-"com.typesafe.play" %% "play-slick-evolutions" % "3.0.0","org.postgresql" % "postgresql" % "9.4-1201-jdbc41")
+libraryDependencies += guice
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.2" % Test
+libraryDependencies += "com.typesafe.play" %% "play-slick" % "4.0.0"
+libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "4.0.0"
+libraryDependencies += "org.postgresql" % "postgresql" % "42.1.4"
+libraryDependencies += specs2 % Test
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
-
-      
