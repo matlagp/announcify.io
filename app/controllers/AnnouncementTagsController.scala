@@ -1,6 +1,7 @@
 package controllers
 
 import com.google.inject.Inject
+import io.swagger.annotations._
 import javax.inject.Singleton
 import models.{AnnouncementTag, Model}
 import play.api.libs.json.{JsValue, Json, Writes}
@@ -10,6 +11,7 @@ import repositories.AnnouncementTagsRepository
 import scala.concurrent.ExecutionContext
 
 @Singleton
+@Api
 class AnnouncementTagsController @Inject()
   (repo: AnnouncementTagsRepository, cc: ControllerComponents)
   (implicit ec: ExecutionContext) extends AbstractController(cc) {
@@ -22,6 +24,9 @@ class AnnouncementTagsController @Inject()
     )
   }
 
+  @ApiOperation(
+    value = "Retrieves all announcement tags available in system"
+  )
   def index() = Action.async { implicit request: Request[AnyContent] =>
     repo.all().map(announcementTag => Ok(Json.toJson(announcementTag)))
   }
