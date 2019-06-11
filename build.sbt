@@ -28,5 +28,6 @@ libraryDependencies += "com.typesafe.play" %% "play-slick" % "4.0.0"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "4.0.0"
 libraryDependencies += "org.postgresql" % "postgresql" % "42.1.4"
 libraryDependencies += specs2 % Test
+libraryDependencies += ws
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
