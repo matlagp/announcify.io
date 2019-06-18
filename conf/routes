@@ -19,4 +19,5 @@ GET     /docs/*file                 controllers.Assets.at(path="/public/swagger"
 
 # Announcement tags
 GET     /announcement_tags          controllers.AnnouncementTagsController.index
+POST    /announcement_tags          controllers.AnnouncementTagsController.create
       

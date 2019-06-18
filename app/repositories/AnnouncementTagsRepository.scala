@@ -4,6 +4,7 @@ import javax.inject.{Inject, Singleton}
 import models.{Model, AnnouncementTag}
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
+import slick.driver.PostgresDriver.api._
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -32,5 +33,9 @@ class AnnouncementTagsRepository @Inject()
 
   def all(): Future[Seq[Model[AnnouncementTag]]] = db.run {
     announcementTags.result
+  }
+
+  def insert(announcementTag: AnnouncementTag): Future[Int] = db.run {
+    announcementTags.map(c => (c.name, c.description)) += (announcementTag.name, announcementTag.description)
   }
 }
