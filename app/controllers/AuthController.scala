@@ -7,31 +7,26 @@ import play.api.mvc._
 import play.api.libs.json._
 import utils.IIETAccountsAPI
 
-import scala.concurrent.{ExecutionContext, Future, Promise}
+import scala.concurrent.{Await, ExecutionContext, Future, Promise}
+import scala.util.{Failure, Success}
 
 @Singleton
 class AuthController @Inject()(cc: ControllerComponents,
                                actorSystem: ActorSystem,
-                               ws: WSClient)(implicit ex: ExecutionContext) extends AbstractController(cc) {
+                               ws: WSClient)(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
   def login = Action {
     Redirect(IIETAccountsAPI.authURL)
   }
 
   def callback(authorizationCode: String) = Action.async {
-    getToken(authorizationCode).map(response => Ok(response.body))
+    getToken(authorizationCode).flatMap(tokenResponse =>
+      getExtendedUserData((tokenResponse.json \ "access_token").as[String])
+    ).map(dataResponse => Ok(dataResponse.body))
   }
 
-  def getPublicUserData(userToken: String) = Action.async {
-    IIETAccountsAPI.getPublicDataRequest(ws, userToken)
-      .get()
-      .map(response => Ok(response.body))
-  }
-
-  def getExtendedUserData(userToken: String) = Action.async {
-    IIETAccountsAPI.getExtendedDataRequest(ws, userToken)
-      .get()
-      .map(response => Ok(response.body))
+  private def getExtendedUserData(userToken: String) = {
+    IIETAccountsAPI.getExtendedDataRequest(ws, userToken).get()
   }
 
   private def getToken(authorizationCode: String) = {

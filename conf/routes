@@ -18,8 +18,5 @@ GET     /docs/                      controllers.Assets.at(path="/public/swagger"
 GET     /docs/*file                 controllers.Assets.at(path="/public/swagger",file)
 
 # OAuth
-GET     /login                      controllers.AuthController.login
+GET     /user/data                  controllers.AuthController.login
 GET     /callback                   controllers.AuthController.callback(code: String)
-GET     /user/public                controllers.AuthController.getPublicUserData(token: String)
-GET     /user/extended              controllers.AuthController.getExtendedUserData(token: String)
-      
