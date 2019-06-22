@@ -20,3 +20,7 @@ GET     /docs/*file                 controllers.Assets.at(path="/public/swagger"
 # OAuth
 GET     /user/data                  controllers.AuthController.login
 GET     /callback                   controllers.AuthController.callback(code: String)
+
+# Announcement tags
+GET     /announcement_tags          controllers.AnnouncementTagsController.index
+POST    /announcement_tags          controllers.AnnouncementTagsController.create
