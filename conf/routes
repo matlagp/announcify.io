@@ -17,4 +17,10 @@ GET     /hello/:name                controllers.HomeController.sayHello(name:Str
 GET     /docs/                      controllers.Assets.at(path="/public/swagger",file="index.html")
 GET     /docs/*file                 controllers.Assets.at(path="/public/swagger",file)
 
-      
+# OAuth
+GET     /user/data                  controllers.AuthController.login
+GET     /callback                   controllers.AuthController.callback(code: String)
+
+# Announcement tags
+GET     /announcement_tags          controllers.AnnouncementTagsController.index
+POST    /announcement_tags          controllers.AnnouncementTagsController.create
